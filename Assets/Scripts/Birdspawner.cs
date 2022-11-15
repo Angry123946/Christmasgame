@@ -9,7 +9,7 @@ public class Birdspawner : MonoBehaviour
     [SerializeField] private int i = 10;
 
     [SerializeField] private int co_ile_dowac;
-    [SerializeField] private Vector3 pos = new Vector3(100, 0, Random.Range(1, 10));
+    [SerializeField] private Vector3 pos = new Vector3(100, 0, 0);
 
     public void Gnerate()
     {
@@ -23,5 +23,9 @@ public class Birdspawner : MonoBehaviour
     void Start()
     {
         InvokeRepeating("Gnerate", 0, 0.4f);
+    }
+    private void Awake()
+    {
+        pos = new Vector3(100,  Random.Range(1, 10), 0);
     }
 }
