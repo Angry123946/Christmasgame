@@ -1,25 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public sealed class Movement : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] float speedflying;
-    [SerializeField] Rigidbody2D rb;
+    [SerializeField] private float[] heights;
+    [SerializeField] private int currentHeight;
+    [SerializeField] private float speed;
+    [SerializeField] private float speedflying;
+    [SerializeField] private Rigidbody2D rb;
 
     void Update()
     {
-        rb.velocity= Vector2.right*speedflying;
+        rb.velocity = Vector2.right * speedflying;
 
-        if(Input.GetKey(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && currentHeight > 0)
         {
-            rb.AddForce(Vector2.up*speedflying);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.AddForce(Vector2.down * speedflying);
+            currentHeight--;
         }
 
+        if (Input.GetKeyDown(KeyCode.S) && currentHeight < heights.Length - 1)
+        {
+            currentHeight++;
+        }
+
+        Vector3 position = transform.position;
+        position.y = Mathf.Lerp(position.y, heights[currentHeight], Time.deltaTime * speed);
+        transform.position = position;
     }
 }

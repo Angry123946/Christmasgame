@@ -16,12 +16,21 @@ public class Score : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Points++;
-        
-        Gift.giftcount++;
+        if(tag=="good")
+        {
+            Points = Points + 2;
+            Gift.giftcount++;
+            OnScoreChange?.Invoke();
+            Destroy(collision.gameObject);
+        }
+        else
+        {
+            
+            OnScoreChange?.Invoke();
+            Destroy(collision.gameObject);
+        }
 
-        OnScoreChange?.Invoke();
-        Destroy(collision.gameObject);
+        
     }
 }
 

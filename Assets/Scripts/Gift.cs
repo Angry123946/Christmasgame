@@ -9,16 +9,23 @@ public class Gift : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (giftcount >= 0)
+            Debug.Log(giftcount);
+            if (giftcount > 0)
             {
                 Instantiate(gift, transform.position, Quaternion.identity);
                 giftcount--;
             }
-            else { 
-            Application.Quit();
+            else
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
             }
+
         }
     }
 
