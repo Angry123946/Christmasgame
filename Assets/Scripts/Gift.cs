@@ -6,9 +6,15 @@ public class Gift : MonoBehaviour
 {
     [SerializeField] GameObject gift;
     public static int giftcount=10;
+    Lose lose = new Lose();
 
     private void Update()
     {
+        if (giftcount <= 0)
+        {
+            lose.Losee();
+        }
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log(giftcount);
@@ -17,14 +23,7 @@ public class Gift : MonoBehaviour
                 Instantiate(gift, transform.position, Quaternion.identity);
                 giftcount--;
             }
-            else
-            {
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
-            }
+            
 
         }
     }
