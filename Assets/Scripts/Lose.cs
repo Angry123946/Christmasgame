@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Lose : MonoBehaviour
 {
-    [SerializeField] private GameObject panel;
+    private void Awake()
+    {
+        GameObject panel = GetComponent<Panel>();
+    }
     public void Losee()
     {
         panel.SetActive(true);
